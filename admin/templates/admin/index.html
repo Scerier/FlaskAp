@@ -1,0 +1,35 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="stats">
+        <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <div class="stat-content">
+                <span class="stat-value">{{ total_users }}</span>
+                <span class="stat-label">Пользователи</span>
+            </div>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-gamepad"></i>
+            <div class="stat-content">
+                <span class="stat-value">{{ total_games }}</span>
+                <span class="stat-label">Игры</span>
+            </div>
+        </div>
+    </div>
+    <div class="charts">
+        <div class="chart-container">
+            <h3 class="chart-title">Регистрация пользователей</h3>
+            <canvas id="usersChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3 class="chart-title">Добавление игр</h3>
+            <canvas id="gamesChart"></canvas>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{url_for('.static', filename='js/chart_script.js')}}" rel="javascript"></script>
+
+{% endblock %}
