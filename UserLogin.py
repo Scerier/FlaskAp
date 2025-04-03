@@ -21,6 +21,9 @@ class UserLogin(UserMixin):
     def getEmail(self):
         return self.__user.email if self.__user else "Без email"
 
+    def getLogin(self):
+        return self.__user.login if self.__user else "Без логина"
+
     def getAvatar(self, app):
         img = None
         if not self.__user or not hasattr(self.__user, 'avatar') or not self.__user.avatar:

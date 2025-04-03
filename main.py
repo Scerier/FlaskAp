@@ -131,7 +131,7 @@ def showPost(alias):
     if not title:
         abort(404)
 
-    return render_template('post.html', menu=dbase.getMenu(), title=title, post=post)
+    return render_template('post.html', menu= dbase.getMenu(), title=title, post=post)
 
 @app.route("/addpost", methods=["POST", "GET"])
 @login_required

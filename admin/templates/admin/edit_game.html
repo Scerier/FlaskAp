@@ -11,65 +11,70 @@
     </a>
 </div>
 <div class="form-container">
-    <h1>Добавить игру</h1>
+    <h1>Редактировать параметры игры: {{game.title}}</h1>
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Название:</label>
-            <input type="text" name="title" id="title" class="form-input" required>
+            <input type="text" name="title" id="title" class="form-input" value="{{ game.title }}" required>
         </div>
         <div class="form-group">
             <label for="description">Описание:</label>
-            <textarea name="description" id="description" class="form-input" rows="4" required></textarea>
+            <textarea name="description" id="description" class="form-input" rows="16" required>{{ game.description }}</textarea>
         </div>
         <div class="form-group">
             <label for="genre">Жанр:</label>
             <select name="genre" id="genre" class="form-input">
                 <option value="">Выберите жанр</option>
                 {% for genre in genres %}
-                <option value="{{ genre }}">{{ genre }}</option>
+                <option value="{{ genre }}" {% if game.genre == genre %}selected{% endif %}>{{ genre }}</option>
                 {% endfor %}
             </select>
         </div>
         <div class="form-group">
             <label for="cover">Обложка (файл):</label>
-            <input type="file" name="cover" id="cover" class="form-input" accept="image/*" required>
+            <input type="file" name="cover" id="cover" class="form-input" accept="image/*">
+            {% if game.cover %}
+                <p>Текущая обложка загружена. Загрузите новый файл, если хотите обновить.</p>
+            {% endif %}
         </div>
+
         <div class="form-group">
             <label>Тип игры:</label>
             <div class="radio-group">
-                <input type="radio" name="type" value="link" id="game_link" checked>
-                <label for="game_link">Внешняя ссылка на игру</label>
-                <input type="radio" name="type" value="pygame" id="game_pygame">
+                <input type="radio" name="type" value="link" id="game_link" {% if game.link.startswith('http') %}checked{% endif %}>
+                <label for="game_link">Внешняя ссылка</label>
+                <input type="radio" name="type" value="pygame" id="game_pygame" {% if game.link.startswith('/static/games') %}checked{% endif %}>
                 <label for="game_pygame">Pygame игра</label>
-                <input type="radio" name="type" value="unity" id="game_unity">
-                 <label for="game_unity">Unity игра</label>
+                <input type="radio" name="type" value="unity" id="game_unity" {% if game.type == 'unity' %}checked{% endif %}>
+                <label for="game_unity">Unity WebGL игра</label>
             </div>
         </div>
 
-        <div class="form-group" id="link_field">
-            <label for="link">Cсылка на игру:</label>
-            <input type="text" name="link" id="link" class="form-input">
+        <div class="form-group" id="link_field" style="display: {% if game.link.startswith('http') %}block{% else %}none{% endif %};">
+            <label for="link">Ссылка на игру:</label>
+            <input type="text" name="link" id="link" class="form-input" value="{% if game.link.startswith('http') %}{{ game.link }}{% endif %}">
         </div>
 
-        <div class="form-group" id="pygame_fields" style="display: none;">
-            <label for="pygame_zip">Архив с игрой:</label>
+        <div class="form-group" id="pygame_fields" style="display: {% if game.link.startswith('/static/games') %}block{% else %}none{% endif %};">
+            <label for="pygame_zip">Новый архив с игрой (опционально):</label>
             <input type="file" name="pygame_zip" id="pygame_zip" class="form-input" accept=".zip">
-            <label for="pygame_installer">Установщик (.exe, необязательно):</label>
+            <label for="pygame_installer">Новый установщик (.exe, заменит текущий, необязательно):</label>
             <input type="file" name="pygame_installer" id="pygame_installer" class="form-input" accept=".exe">
-            <label for="pygame_screenshots_zip">Архив со скриншотами:</label>
+            <label for="pygame_screenshots_zip">Новый архив со скриншотами (опционально):</label>
             <input type="file" name="pygame_screenshots_zip" id="pygame_screenshots_zip" class="form-input" accept=".zip">
         </div>
-        <div class="form-group" id="unity_fields" style="display: none;">
-            <label for="unity_zip">Архив с Unity WebGL игрой:</label>
+        <div class="form-group" id="unity_fields" style="display: {% if game.type == 'unity' %}block{% else %}none{% endif %};">
+          <label for="unity_zip">Архив с Unity WebGL игрой:</label>
             <input type="file" name="unity_zip" id="unity_zip" class="form-input" accept=".zip">
             <label for="unity_installer">Установщик (.exe, необязательно):</label>
             <input type="file" name="unity_installer" id="unity_installer" class="form-input" accept=".exe">
             <label for="unity_screenshots_zip">Архив со скриншотами:</label>
             <input type="file" name="pygame_screenshots_zip" id="unity_screenshots_zip" class="form-input" accept=".zip">
         </div>
-        <button type="submit" class="styled-button">Добавить игру</button>
+        <button type="submit" class="styled-button">Сохранить изменения</button>
     </form>
 </div>
+
 <script>
     document.querySelectorAll('input[name="type"]').forEach(radio => {
         radio.addEventListener('change', function() {

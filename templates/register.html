@@ -7,7 +7,7 @@
             <div class="flash {{cat}}">{{msg}}</div>
         {% endfor %}
 
-<div class="wnd_dlg_back register_wnd">
+<div class="wnd_dlg_back login_wnd">
     <div class="login">
         <p class="title">Регистрация</p>
         <form method="POST" action="">
@@ -63,7 +63,9 @@
                 {% endif %}
             </div>
             <div class="form-group">
-                <p>{{form.recaptcha}}</p>
+                {{ form.recaptcha() }}
+            </div>
+            <div class="form-group">
                 {{ form.submit(class="login_button") }}
             </div>
         </form>

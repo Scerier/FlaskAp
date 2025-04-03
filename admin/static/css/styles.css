@@ -3,22 +3,23 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #0A0C1B, #121321); /* Градиентный фон */
-    color: #fff; /* Белый текст по умолчанию */
+    background: linear-gradient(135deg, #0A0C1B, #121321);
+    color: #fff;
     font-family: Arial, sans-serif;
 }
 
 a {
-    color: #6D5DFC;
+    color: #129fe6;
     text-decoration: none;
 }
 a:hover {
-    color: #8F7DFF;
+    color: #22dcf1;
 }
 h1 {
     text-align: center;
     color: #fff;
 }
+
 /* Универсальный класс для очистки float */
 .clear {clear: both;}
 
@@ -85,7 +86,7 @@ div.login .title {
 }
 .login_button {
     color: #fff;
-    background: linear-gradient(135deg, #5B46E5, #8A71F5);
+    background: linear-gradient(135deg, #1196d7, #00cee7);
     border: none;
     font-size: 14px;
     padding: 10px 20px;
@@ -94,7 +95,8 @@ div.login .title {
     text-align: center;
 }
 .login_button:hover {
-    background: linear-gradient(135deg, #6D5DFC, #9B86FF);
+    background: linear-gradient(135deg, #29abee, #22dcf1);
+    transform: scale(1.05);
 }
 
 /* Меню */
@@ -117,7 +119,7 @@ ul.mainmenu li a {
     text-transform: uppercase;
 }
 ul.mainmenu li a:hover {
-    color: #9B86FF;
+    color: #22dcf1;
 }
 
 /* Список постов */
@@ -147,29 +149,83 @@ ul.list-posts .annonce {
     margin: 0;
     padding: 10px;
 }
+/* Стили для кастомных радиокнопок */
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Расстояние между радиокнопками и их метками */
+}
+
+.radio-group input[type="radio"] {
+    display: none; /* Скрываем стандартные радиокнопки */
+}
+
+.radio-group label {
+    position: relative;
+    padding-left: 30px; /* Отступ для кастомного круга */
+    font-size: 16px;
+    color: #ccc;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Внешний круг радиокнопки */
+.radio-group label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: #1B1D2B;
+    border: 2px solid #888;
+    border-radius: 50%;
+    transition: border-color 0.3s ease;
+}
+
+/* Внутренняя точка при выборе */
+.radio-group input[type="radio"]:checked + label::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #129fe6;
+    border-radius: 50%;
+}
+
+/* Эффект наведения */
+.radio-group label:hover::before {
+    border-color: #129fe6;
+}
+
 /* Кнопка удаления постов и пользователей */
 .delete-button {
-    position: absolute; /* Позиционирование кнопки относительно родителя */
-    right: 10px; /* Отступ от правого края */
-    top: 50%; /* Центрирование по вертикали */
-    transform: translateY(20%); /* Корректировка для центрирования */
-    background: linear-gradient(135deg, #FF4C4C, #FF6F6F); /* Градиентный фон */
-    color: #fff; /* Цвет текста */
-    border: none; /* Убираем рамку */
-    border-radius: 20px; /* Закругление краев */
-    padding: 5px 10px; /* Внутренний отступ */
-    cursor: pointer; /* Указатель в виде руки */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(20%);
+    background: linear-gradient(135deg, #FF4C4C, #FF6F6F);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
     font-size: 14px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Тень */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 .delete-button:hover {
-    background: linear-gradient(135deg, #FF6F6F, #FF8A8A); /* Более светлый градиент при наведении */
+    background: linear-gradient(135deg, #FF6F6F, #FF8A8A);
 }
+
 /* Кнопка редактирования постов и пользователей */
 .edit-button {
     position: absolute;
     right: 10px;
-    top: calc(50% - 40px); /* Поднял кнопку выше */
+    top: calc(50% - 40px);
     transform: translateY(20%);
     background: linear-gradient(135deg, #4CAF50, #66BB6A);
     color: #fff;
@@ -180,15 +236,15 @@ ul.list-posts .annonce {
     font-size: 14px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
-
 .edit-button:hover {
     background: linear-gradient(135deg, #66BB6A, #81C784);
 }
+
 /* Добавление контейнера с кнопкой */
 ul.list-posts li {
-    position: relative; /* Для позиционирования кнопки внутри записи */
-    /*padding-right: 50px; !* Отступ для размещения кнопки *!*/
+    position: relative;
 }
+
 /* Flash-сообщения */
 .flash {
     padding: 10px;
@@ -208,7 +264,7 @@ ul.list-posts li {
 
 .add_button {
     color: #fff;
-    background: linear-gradient(135deg, #5B46E5, #8A71F5);
+    background: linear-gradient(135deg, #1196d7, #00cee7);
     border: none;
     font-size: 14px;
     padding: 10px 20px;
@@ -217,8 +273,24 @@ ul.list-posts li {
     text-align: center;
 }
 .add_button:hover {
-    background: linear-gradient(135deg, #6D5DFC, #9B86FF);
-    box-shadow: 0 0 10px rgba(109, 93, 252, 0.5);
+    background: linear-gradient(135deg, #29abee, #22dcf1);
+    box-shadow: 0 0 10px rgba(93, 231, 252, 0.5);
+    transform: scale(1.05);
+}
+.add_btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #1196d7, #00cee7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+}
+.add_btn:hover {
+    background: linear-gradient(135deg, #29abee, #22dcf1);
+    box-shadow: 0 0 10px rgba(93, 231, 252, 0.23);
+    transform: scale(1.05);
 }
 
 .form-container {
@@ -230,28 +302,23 @@ ul.list-posts li {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
     text-align: center;
 }
-
 .form-container h1 {
     margin-bottom: 20px;
     font-size: 24px;
     color: #fff;
 }
-
 .form-group {
     margin-bottom: 20px;
-
 }
-
 .form-group label {
     display: block;
     margin-bottom: 8px;
     font-size: 16px;
     color: #ccc;
 }
-
 .form-input {
-    width: calc(100% - 20px); /* Учёт отступов */
-    max-width: 460px; /* Максимальная ширина поля */
+    width: calc(100% - 20px);
+    max-width: 460px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #444;
@@ -260,35 +327,33 @@ ul.list-posts li {
     color: #fff;
     outline: none;
     transition: box-shadow 0.3s ease;
-    margin: 0 auto; /* Центрирование поля */
+    margin: 0 auto;
     display: block;
 }
-
 .form-input:focus {
-    box-shadow: 0 0 8px rgba(109, 93, 252, 0.8);
-    border-color: #6D5DFC;
+    box-shadow: 0 0 8px rgb(3, 129, 194);
+    border-color: #129fe6;
 }
-
 textarea.form-input {
     resize: none;
 }
-
 .styled-button {
     display: inline-block;
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    background: linear-gradient(135deg, #5B46E5, #8A71F5);
+    background: linear-gradient(135deg, #1196d7, #00cee7);
     border: none;
     border-radius: 20px;
     cursor: pointer;
     transition: background 0.3s ease, box-shadow 0.3s ease;
 }
-
 .styled-button:hover {
-    background: linear-gradient(135deg, #6D5DFC, #9B86FF);
-    box-shadow: 0 4px 12px rgba(109, 93, 252, 0.8);
+    background: linear-gradient(135deg, #29abee, #22dcf1);
+    box-shadow: 0 0 10px rgba(93, 231, 252, 0.5);
+    transform: scale(1.05);
 }
+
 .dashboard {
     padding: 20px;
     background: linear-gradient(135deg, #0A0C1B, #121321);
@@ -311,28 +376,23 @@ textarea.form-input {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .stat-item:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
 }
-
 .stat-item i {
     font-size: 36px;
-    color: #6D5DFC;
+    color: #129fe6;
     margin-right: 15px;
 }
-
 .stat-content {
     text-align: left;
 }
-
 .stat-value {
     font-size: 24px;
     font-weight: bold;
     color: #FFF;
 }
-
 .stat-label {
     font-size: 14px;
     color: #aaa;
@@ -349,22 +409,89 @@ textarea.form-input {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.chart-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
 }
 
 .chart-title {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 18px;
-    color: #FFF;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 canvas {
     max-width: 100%;
-    height: auto;
+    height: 300px !important; /* Фиксированная высота для консистентности */
+    width: 100%;
 }
+
+/* Дополнительные стили для графиков */
+.chart-wrapper {
+    position: relative;
+    padding: 10px;
+}
+
+.chart-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(18, 19, 33, 0.1), rgba(42, 44, 63, 0.1));
+    pointer-events: none;
+    z-index: 1;
+}
+
+.chart-container canvas {
+    position: relative;
+    z-index: 2;
+}
+
+/* Адаптивность для графиков */
+@media (max-width: 768px) {
+    .charts {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .chart-container {
+        padding: 15px;
+    }
+
+    canvas {
+        height: 250px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .stat-item {
+        width: 100%;
+        justify-content: center;
+    }
+
+    canvas {
+        height: 200px !important;
+    }
+}
+
 .container {
     max-width: 1140px;
     margin: 0 auto;
-    padding: 0 15px; /* Отступы от краев */
+    padding: 0 15px;
     box-sizing: border-box;
 }
 
@@ -393,6 +520,7 @@ canvas {
 .col-10 { flex: 0 0 83.33%; max-width: 83.33%; }
 .col-11 { flex: 0 0 91.67%; max-width: 91.67%; }
 .col-12 { flex: 0 0 100%; max-width: 100%; }
+
 /* Подвал */
 footer {
     background: #1B1D2B;
@@ -402,14 +530,14 @@ footer {
     font-size: 14px;
 }
 footer a {
-    color: #8F7DFF;
+    color: #22dcf1;
 }
 
 /* Sidebar */
 .sidebar {
     position: fixed;
     top: 0;
-    left: 0px; /* Скрыть sidebar */
+    left: -250px;
     width: 250px;
     height: 100%;
     background: #1B1D2B;
@@ -418,11 +546,9 @@ footer a {
     z-index: 1000;
     padding: 20px;
 }
-
 .sidebar.active {
-    left: -250px; /* Показать sidebar */
+    left: 0px;
 }
-
 .sidebar .close-btn {
     background: none;
     border: none;
@@ -432,25 +558,21 @@ footer a {
     margin-bottom: 20px;
     float: right;
 }
-
 .sidebar .menu-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
 .sidebar .menu-list li {
     margin: 15px 0;
 }
-
 .sidebar .menu-list li a {
     color: #fff;
     text-decoration: none;
     font-size: 18px;
 }
-
 .sidebar .menu-list li a:hover {
-    color: #9B86FF;
+    color: #22dcf1;
 }
 
 /* Кнопка закрытия */
@@ -466,14 +588,13 @@ footer a {
     transition: transform 0.3s ease, color 0.3s ease;
 }
 .close-btn:hover {
-    color: #6D5DFC;
+    color: #129fe6;
 }
 
 /* Анимация стрелки */
 .sidebar.active .close-btn {
-    transform: rotate(180deg); /* Плавный поворот */
+    transform: rotate(180deg);
 }
-
 
 /* Open button */
 .open-btn {
@@ -490,7 +611,6 @@ footer a {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     z-index: 1001;
 }
-
 .open-btn:hover {
     background: #2A2C3F;
 }
